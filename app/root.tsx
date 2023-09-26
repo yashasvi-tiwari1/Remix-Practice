@@ -11,9 +11,22 @@ import {
 } from "@remix-run/react";
 import stylesheet from "~/tailwind.css";
 
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesheet },
-];
+export function links() {
+  return [
+    // {
+    //   rel: "stylesheet",
+    //   href: "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css",
+    // },
+  ];
+}
+export function meta() {
+  return [
+    {
+      title: "First Project on remix",
+      description: "Learning phase of Remix",
+    },
+  ];
+}
 
 export default function App() {
   return (
@@ -25,35 +38,10 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div id="sidebar">
-          <h1>Remix Contacts</h1>
-          <div>
-            <Form id="search-form" role="search" method="post">
-              <input
-                type="text"
-                aria-label="Search Contacts"
-                id="q"
-                name="q"
-                placeholder="Search"
-              />
-              <div aria-hidden hidden={true} id="search-spinner"></div>
-            </Form>
-          </div>
-          <nav>
-            <ul>
-              <li>
-                <a href="/contact/1"> Yashasvi Tiwari</a>
-              </li>
-              <li>
-                <a href="/contact/2">Saurab Bikram Sen</a>
-              </li>
-            </ul>
-          </nav>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </div>
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
   );
